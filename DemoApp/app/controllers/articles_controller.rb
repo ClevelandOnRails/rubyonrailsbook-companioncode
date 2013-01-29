@@ -1,6 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
-
   # GET /articles
   # GET /articles.json
   def index
@@ -15,6 +13,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @article = Article.find(params[:id])
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @article }
@@ -34,12 +34,13 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    @article = Article.find(params[:id])
   end
 
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(params[:article])
 
     respond_to do |format|
       if @article.save
@@ -52,11 +53,13 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
+  # PUT /articles/1
+  # PUT /articles/1.json
   def update
+    @article = Article.find(params[:id])
+
     respond_to do |format|
-      if @article.update(article_params)
+      if @article.update_attributes(params[:article])
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { head :no_content }
       else
@@ -69,6 +72,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    @article = Article.find(params[:id])
     @article.destroy
 
     respond_to do |format|
@@ -76,19 +80,4 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
-
-    # Use this method to whitelist the permissible parameters. Example:
-    #   params.require(:person).permit(:name, :age)
-    #
-    # Also, you can specialize this method with per-user checking of permissible
-    # attributes.
-    def article_params
-      params.require(:article).permit(:title, :body)
-    end
 end

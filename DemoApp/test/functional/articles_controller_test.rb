@@ -35,7 +35,7 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should update article" do
-    patch :update, id: @article, article: { body: @article.body, title: @article.title }
+    put :update, id: @article, article: { body: @article.body, title: @article.title }
     assert_redirected_to article_path(assigns(:article))
   end
 

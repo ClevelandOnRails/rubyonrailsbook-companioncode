@@ -86,8 +86,8 @@ programming in general.
 Debugger support is available through the debugger command when you start your
 Mongrel or WEBrick server with --debugger. This means that you can break out of
 execution at any point in the code, investigate and change the model, and then,
-resume execution! You need to install the 'debugger' gem to run the server in debugging
-mode. Add gem 'debugger' to your Gemfile and run <tt>bundle</tt> to install it. Example:
+resume execution! You need to install ruby-debug to run the server in debugging
+mode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:
 
   class WeblogController < ActionController::Base
     def index
@@ -157,15 +157,13 @@ The default directory structure of a generated Ruby on Rails application:
 
   |-- app
   |   |-- assets
-  |   |   |-- images
-  |   |   |-- javascripts
-  |   |   `-- stylesheets
+  |       |-- images
+  |       |-- javascripts
+  |       `-- stylesheets
   |   |-- controllers
-  |   |   `-- concerns
   |   |-- helpers
   |   |-- mailers
   |   |-- models
-  |   |   `-- concerns
   |   `-- views
   |       `-- layouts
   |-- config
@@ -175,26 +173,25 @@ The default directory structure of a generated Ruby on Rails application:
   |-- db
   |-- doc
   |-- lib
-  |   |-- assets
   |   `-- tasks
   |-- log
   |-- public
   |-- script
   |-- test
-  |   |-- controllers
   |   |-- fixtures
-  |   |-- helpers
+  |   |-- functional
   |   |-- integration
-  |   |-- mailers
-  |   |-- models
-  |   `-- performance
+  |   |-- performance
+  |   `-- unit
   |-- tmp
-  |   `-- cache
-  |       `-- assets
+  |   |-- cache
+  |   |-- pids
+  |   |-- sessions
+  |   `-- sockets
   `-- vendor
-      `-- assets
-          |-- javascripts
+      |-- assets
           `-- stylesheets
+      `-- plugins
 
 app
   Holds all the code that's specific to this particular application.
@@ -220,7 +217,7 @@ app/views/layouts
   Holds the template files for layouts to be used with views. This models the
   common header/footer method of wrapping views. In your views, define a layout
   using the <tt>layout :default</tt> and create a file named default.html.erb.
-  Inside default.html.erb, call <%= yield %> to render the view using this
+  Inside default.html.erb, call <% yield %> to render the view using this
   layout.
 
 app/helpers
@@ -259,5 +256,6 @@ test
   directory.
 
 vendor
-  External libraries that the application depends on. If the app has frozen rails,
-  those gems also go here, under vendor/rails/. This directory is in the load path.
+  External libraries that the application depends on. Also includes the plugins
+  subdirectory. If the app has frozen rails, those gems also go here, under
+  vendor/rails/. This directory is in the load path.
