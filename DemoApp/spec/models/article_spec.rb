@@ -21,4 +21,13 @@ describe Article do
   describe "when both title and body are present" do
     it { should be_valid }
   end
+
+  describe "when both title and body are not present" do
+    before { @article.title = "", @article.body = ""}
+    it { should_not be_valid }
+  end
+
+  describe "@article should not respond to crackerjacks" do
+    it { should_not respond_to(:crackerjacks)}
+  end
 end
