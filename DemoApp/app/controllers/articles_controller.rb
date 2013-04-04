@@ -1,4 +1,9 @@
 class ArticlesController < ApplicationController
+#  before_filter :authenticate_user!,
+  before_filter :require_login, 
+    :only => [:destroy, :create, :edit, :update, :new]
+  
+
   # GET /articles
   # GET /articles.json
   def index
@@ -25,7 +30,6 @@ class ArticlesController < ApplicationController
   # GET /articles/new.json
   def new
     @article = Article.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @article }
@@ -35,13 +39,14 @@ class ArticlesController < ApplicationController
   # GET /articles/1/edit
   def edit
     @article = Article.find(params[:id])
+    authorize! :edit, @article
   end
 
   # POST /articles
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-
+    @article.user_id = current_user.id
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }

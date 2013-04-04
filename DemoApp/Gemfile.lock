@@ -34,6 +34,7 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.4.0)
     builder (3.0.4)
+    cancan (1.6.9)
     capybara (1.1.2)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -166,6 +167,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.5.0)
   bootstrap-sass
+  cancan
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.1)
   jquery-rails
